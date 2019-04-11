@@ -3,6 +3,7 @@ from __future__ import absolute_import, unicode_literals
 
 import hashlib
 import os
+import uuid
 from datetime import datetime
 
 from django.conf import settings
@@ -55,6 +56,8 @@ class File(PolymorphicModel, mixins.IconsMixin):
     file_type = 'File'
     _icon = "file"
     _file_data_changed_hint = None
+
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
 
     folder = models.ForeignKey(
         Folder,
